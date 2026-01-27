@@ -1,0 +1,188 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, Mail, MapPin, Phone } from "lucide-react";
+import { toast } from "sonner";
+
+export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+    setFormData({ name: "", email: "", company: "", message: "" });
+    setIsSubmitting(false);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  return (
+    <section id="contact" className="section-padding relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-t from-secondary/30 via-background to-background" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Left Column - Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
+              Contato
+            </span>
+            <h2 className="heading-section mb-6">
+              Vamos Criar <span className="">Juntos</span>
+            </h2>
+            <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
+              Pronto para transformar sua visão em realidade? Entre em contato e 
+              vamos discutir como podemos elevar seu próximo projeto.
+            </p>
+
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <span className="text-sm text-muted-foreground block">Email</span>
+                  <a href="mailto:geral@estudoseven.ao" className="text-foreground hover:text-primary transition-colors">
+                    geral@estudoseven.ao
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Phone className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <span className="text-sm text-muted-foreground block">Telefone</span>
+                  <a href="tel:+244941910460" className="text-foreground hover:text-primary transition-colors">
+                    +244 941 910 460
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <span className="text-sm text-muted-foreground block">Localização</span>
+                  <span className="text-foreground">Luanda - Angola</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column - Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <form onSubmit={handleSubmit} className="card-premium p-8 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="text-sm font-medium mb-2 block">
+                    Nome
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    placeholder="Seu nome"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="text-sm font-medium mb-2 block">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                    placeholder="seu@email.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="company" className="text-sm font-medium mb-2 block">
+                  Empresa
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                  placeholder="Nome da empresa (opcional)"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="text-sm font-medium mb-2 block">
+                  Mensagem
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors resize-none"
+                  placeholder="Conte-nos sobre seu projeto..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                    Enviando...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    Enviar Mensagem
+                    <Send className="w-4 h-4" />
+                  </span>
+                )}
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
