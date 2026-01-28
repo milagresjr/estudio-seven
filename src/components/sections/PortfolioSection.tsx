@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import ProjectModal from "../portfolio/ProjectModal";
 import { useProjects } from "@/hooks/useProjects";
 import { Project } from "../../lib/api/types"; // Importe a interface definida acima
+import { UrlBase } from "@/lib/api";
 
 export default function PortfolioSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -79,7 +80,7 @@ export default function PortfolioSection() {
                 className="portfolio-item group cursor-pointer relative overflow-hidden rounded-xl bg-secondary"
               >
                 <img
-                  src={`http://localhost:8000${project.thumbnail_url}`}
+                  src={`http://api.softseven.ao/${project.thumbnail_url}`}
                   alt={project.title}
                   className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110"
                 />

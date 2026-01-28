@@ -2,12 +2,14 @@
 import axios, { AxiosError } from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:8000/api/', // ou process.env
+  baseURL: 'http://api.softseven.ao/api/', // ou process.env
   withCredentials: true, // se usar cookies / sessão
   headers: {
     Accept: 'application/json',
   },
 });
+
+export const UrlBase = 'http://api.softseven.ao/api/';
 
 // Interceptor de request (ex: token)
 api.interceptors.request.use((config) => {
