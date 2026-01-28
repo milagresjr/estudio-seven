@@ -22,6 +22,9 @@ const recentMessages = [
 ];
 
 const Dashboard = () => {
+
+  
+  
   return (
     <AdminLayout title="Dashboard" subtitle="Visão geral do seu estúdio">
       {/* Stats Grid */}

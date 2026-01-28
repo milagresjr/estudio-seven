@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import AdminSidebar from "./AdminSidebar";
-
+import { useNavigate } from "react-router-dom";
 
 
 interface AdminLayoutProps {
@@ -10,6 +10,15 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout = ({ children, title, subtitle }: AdminLayoutProps) => {
+
+  const navigate = useNavigate();
+
+  if (!localStorage.getItem("auth_token")) {
+    navigate("/admin/login");
+  } 
+
+  
+
   return (
     <div className="min-h-screen bg-background">
       <AdminSidebar />
@@ -23,5 +32,6 @@ const AdminLayout = ({ children, title, subtitle }: AdminLayoutProps) => {
     </div>
   );
 };
+
 
 export default AdminLayout;

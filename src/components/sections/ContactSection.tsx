@@ -2,6 +2,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: "http://localhost:8000/api",
+});
+
+
+
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -15,24 +23,36 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
-    setFormData({ name: "", email: "", company: "", message: "" });
-    setIsSubmitting(false);
+
+    try {
+      await api.post("/contact", {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        message: formData.message,
+      });
+
+      toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+      setFormData({ name: "", email: "", company: "", message: "" });
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.message || "Erro ao enviar mensagem"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+
   return (
     <section id="contact" className="section-padding relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-t from-secondary/30 via-background to-background" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left Column - Info */}
@@ -49,7 +69,7 @@ export default function ContactSection() {
               Vamos Criar <span className="">Juntos</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-              Pronto para transformar sua visão em realidade? Entre em contato e 
+              Pronto para transformar sua visão em realidade? Entre em contato e
               vamos discutir como podemos elevar seu próximo projeto.
             </p>
 
@@ -60,8 +80,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">Email</span>
-                  <a href="mailto:geral@estudoseven.ao" className="text-foreground hover:text-primary transition-colors">
-                    geral@estudoseven.ao
+                  <a href="mailto:estudio@softseven.ao" className="text-foreground hover:text-primary transition-colors">
+                    estudio@softseven.ao
                   </a>
                 </div>
               </div>
@@ -72,8 +92,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">Telefone</span>
-                  <a href="tel:+244941910460" className="text-foreground hover:text-primary transition-colors">
-                    +244 941 910 460
+                  <a href="tel:+244922347187" className="text-foreground hover:text-primary transition-colors">
+                    +244 922 347 187
                   </a>
                 </div>
               </div>
