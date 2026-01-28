@@ -80,7 +80,7 @@ export default function PortfolioSection() {
                 className="portfolio-item group cursor-pointer relative overflow-hidden rounded-xl bg-secondary"
               >
                 <img
-                  src={`http://api.softseven.ao/${project.thumbnail_url}`}
+                  src={`${UrlBase}${project.thumbnail_url}`}
                   alt={project.title}
                   className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-110"
                 />
