@@ -14,7 +14,6 @@ export const UrlBase = 'https://api.softseven.ao';
 // Interceptor de request (ex: token)
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('auth_token');
-  console.log('Using token:', token);
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
