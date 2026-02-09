@@ -1,14 +1,39 @@
 import { motion } from "framer-motion";
-import { Award, Users, Film, Camera } from "lucide-react";
+import { Award, Users, Film, Camera } from "lucide-react"; 
+import { useStudioSettings} from "@/hooks/useStudioSettings";
+import { useEffect, useState } from "react";
 
 const stats = [
-  { icon: Film, value: "150+", label: "Projetos Entregues" },
+  { icon: Film, value: "150+", label: "Projectos Entregues" },
   { icon: Users, value: "80+", label: "Clientes Globais" },
   { icon: Award, value: "25", label: "Prêmios" },
   { icon: Camera, value: "3", label: "Anos de Experiência" },
 ];
 
 export default function AboutSection() {
+
+  const { data: studioSettings, isLoading } = useStudioSettings();
+  
+    const [settings, setSettings] = useState({
+      studio_name : "",
+      contact_email: "",
+      phone: "",
+      bio: "",
+  
+    });
+
+    // Load settings from API
+      useEffect(() => {
+        if (studioSettings) {
+          setSettings({
+            studio_name: studioSettings.studio_name || "",
+            contact_email: studioSettings.contact_email || "",
+            phone: studioSettings.phone || "",
+            bio: studioSettings.bio || "",
+          });
+        }
+      }, [studioSettings]);
+
   return (
     <section id="about" className="section-padding relative overflow-hidden">
       {/* Background Gradient */}
@@ -24,24 +49,14 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              Sobre o Estúdio
+              Sobre o Estúdio Seven
             </span>
             <h2 className="heading-section mb-8">
               Onde a Visão Encontra o Movimento
             </h2>
             <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-              Somos um estúdio criativo especializado em motion design e fotografia de alto padrão. 
-              Nossa missão é transformar conceitos abstratos em experiências visuais memoráveis 
-              que conectam marcas e audiências.
+              {settings.bio || "O Estúdio Seven é um estúdio de produção de motion design e animação dedicado a transformar ideias em narrativas visuais impactantes. Com uma equipe apaixonada e experiente, oferecemos serviços de produção de motion design e animação para empresas, marcas e criadores de conteúdo. Nossa missão é criar vídeos que não apenas informem, mas também inspirem e envolvam o público, ajudando nossos clientes a contar suas histórias de maneira única e memorável."}
             </p>
-            <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-              Com uma equipe multidisciplinar de diretores de arte, animadores e fotógrafos, 
-              entregamos projetos que transcendem expectativas e estabelecem novos padrões 
-              de excelência visual.
-            </p>
-            <a href="#contact" className="btn-outline">
-              Conheça Nossa Equipe
-            </a>
           </motion.div>
 
           {/* Right Column - Stats */}

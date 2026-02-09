@@ -25,7 +25,7 @@ const services = [
   {
     icon: Palette,
     title: "Direção de Arte",
-    description: "Conceituação visual, identidade de marca, storyboarding e supervisão criativa de projetos.",
+    description: "Conceituação visual, identidade de marca, storyboarding e supervisão criativa de projectos.",
   },
   {
     icon: ImageIcon,

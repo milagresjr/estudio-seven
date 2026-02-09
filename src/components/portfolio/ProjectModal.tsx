@@ -7,6 +7,9 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { useState } from "react";
+import { apiImage } from "@/services/api";
+
+const UrlBase = apiImage.defaults.baseURL || "https://api.softseven.ao";
 
 
 interface ProjectModalProps {
@@ -20,7 +23,7 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
   const [selectedImage, setSelectedImage] = useState(null);
   
   if (!project) return null;
-  // Filtra o projeto atual da lista de sugestões
+  // Filtra o projecto atual da lista de sugestões
   const otherProjects = allProjects.filter(p => p.id !== project.id);
 
 
@@ -46,7 +49,7 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
         {/* Hero Image */}
         <div className="relative h-[60vh] w-full">
           <img
-            src={`http://localhost:8000${project.thumbnail_url}`}
+            src={`${UrlBase}${project.thumbnail_url}`}
             alt={project.title}
             className="w-full h-full object-cover"
           />
@@ -81,7 +84,7 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
 
           {/* Description */}
           <div className="mb-20">
-            <h3 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Sobre o Projeto</h3>
+            <h3 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">Sobre o Projecto</h3>
             <p className="text-xl leading-relaxed text-foreground/80">{project.description}</p>
           </div>
 
@@ -97,14 +100,14 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
                       className="w-full aspect-video rounded-xl"
                     >
                       <source
-                        src={`http://localhost:8000${item.file_url}`}
+                        src={`${UrlBase}${item.file_url}`}
                         type="video/mp4"
                       />
                       Seu navegador não suporta vídeo HTML5.
                     </video>
                   ) : (
                     <img
-                      src={`http://localhost:8000${item.file_url}`}
+                      src={`${UrlBase}${item.file_url}`}
                       alt={item.caption}
                       onClick={() => setSelectedImage(item)}
                       className="w-full h-full object-cover aspect-video cursor-pointer transition-transform duration-300 hover:scale-105"
@@ -120,12 +123,12 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
             </div>
           </div>
         </div>
-        {/* --- NOVA SEÇÃO: CARROSSEL DE OUTROS PROJETOS --- */}
+        {/* --- NOVA SEÇÃO: CARROSSEL DE OUTROS PROJECTOS --- */}
         <div className="container mx-auto px-6 max-w-6xl pb-20 border-t border-border pt-16">
           <div className="flex justify-between items-end mb-8">
             <div>
               <h3 className="text-sm uppercase tracking-widest text-muted-foreground mb-2">Explorar mais</h3>
-              <h2 className="text-3xl font-display font-bold">Outros Projetos</h2>
+              <h2 className="text-3xl font-display font-bold">Outros Projectos</h2>
             </div>
           </div>
 
@@ -145,7 +148,7 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
                 <motion.div
                   onClick={() => {
                     onSelectProject(p);
-                    // Scroll para o topo ao trocar de projeto
+                    // Scroll para o topo ao trocar de projecto
                     document.querySelector('.fixed.inset-0')?.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                   className="group cursor-pointer"

@@ -3,11 +3,9 @@ import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
+import { api } from "@/services/api";
 
-export const api = axios.create({
-  baseURL: "http://localhost:8000/api",
-});
-
+const UrlBase = api.defaults.baseURL || "https://api.softseven.ao/api";
 
 
 
@@ -32,7 +30,7 @@ export default function ContactSection() {
         message: formData.message,
       });
 
-      toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+      toast.success("Mensagem enviada com sucesso! Entraremos em contacto em breve.");
       setFormData({ name: "", email: "", company: "", message: "" });
     } catch (error: any) {
       toast.error(
@@ -63,14 +61,14 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary text-sm font-medium tracking-widest uppercase mb-4 block">
-              Contato
+              Contacto
             </span>
             <h2 className="heading-section mb-6">
               Vamos Criar <span className="">Juntos</span>
             </h2>
             <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-              Pronto para transformar sua visão em realidade? Entre em contato e
-              vamos discutir como podemos elevar seu próximo projeto.
+              Pronto para transformar sua visão em realidade? Entre em contacto e
+              vamos discutir como podemos elevar seu próximo projecto.
             </p>
 
             <div className="space-y-6">
@@ -178,7 +176,7 @@ export default function ContactSection() {
                   required
                   rows={5}
                   className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors resize-none"
-                  placeholder="Conte-nos sobre seu projeto..."
+                  placeholder="Conte-nos sobre seu projecto..."
                 />
               </div>
 

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Instagram, Linkedin, Youtube, Dribbble, Facebook } from "lucide-react";
 
 const socialLinks = [
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/estudiosevenao/", label: "Instagram" },
   { icon: Linkedin, href: "https://www.linkedin.com/company/est%C3%BAdio-seven/", label: "LinkedIn" },
   { icon: Youtube, href: "https://www.youtube.com/channel/UCS46zDrG2KnP3zUsNmSxP2A", label: "YouTube" },
   { icon: Facebook, href: "https://www.facebook.com/share/17oLn6EiiP/", label: "Facebook" },
@@ -22,7 +22,9 @@ export default function Footer() {
             className="flex items-center gap-3"
           >
             <span className="font-display font-semibold text-lg tracking-tight w-32">
-              <img src="./Ativo 28w.png" alt="logo do estudo seven" />
+              <a href="/#">
+                <img src="./Ativo 28w.png" alt="logo do estudo seven" />
+              </a>
             </span>
           </motion.a>
 
@@ -54,7 +56,7 @@ export default function Footer() {
             transition={{ delay: 0.2 }}
             className="text-sm text-muted-foreground"
           >
-            © 2024 Motif Studio. Todos os direitos reservados.
+            © 2026 EstudioSeven. Todos os direitos reservados.
           </motion.p>
         </div>
       </div>

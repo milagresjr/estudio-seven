@@ -1,10 +1,14 @@
+
+// PortfolioSection.tsx
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import ProjectModal from "../portfolio/ProjectModal";
 import { useProjects } from "@/hooks/useProjects";
 import { Project } from "../../lib/api/types"; // Importe a interface definida acima
-import { UrlBase } from "@/lib/api";
+import { apiImage } from "@/services/api";
+
+const UrlBase = apiImage.defaults.baseURL || "https://api.softseven.ao";
 
 export default function PortfolioSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -25,13 +29,13 @@ export default function PortfolioSection() {
     return ["all", ...uniqueCategories];
   }, [projects]);
 
-  // 2. Filtra os projetos
+  // 2. Filtra os projectos
   const filteredProjects = projects.filter((p) => {
     if (filter === "all") return true;
     return p.category.toLowerCase() === filter;
   });
 
-  if (isLoading) return <div className="text-center py-20">Carregando projetos...</div>;
+  if (isLoading) return <div className="text-center py-20">Carregando projectos...</div>;
 
   return (
     <>
@@ -67,7 +71,7 @@ export default function PortfolioSection() {
             ))}
           </div>
 
-          {/* Grid de Projetos */}
+          {/* Grid de Projectos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project, index) => (
               <motion.div

@@ -12,7 +12,7 @@ import {
 
 const menuItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/admin/dashboard" },
-  { icon: FolderOpen, label: "Projetos", path: "/admin/projects" },
+  { icon: FolderOpen, label: "Projectos", path: "/admin/projects" },
   { icon: Settings, label: "Configurações", path: "/admin/settings" },
 ];
 

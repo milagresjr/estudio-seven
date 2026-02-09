@@ -43,10 +43,6 @@ export default function HeroSection() {
             Ver Portfólio
             <ArrowDown className="ml-2 w-4 h-4 transition-transform group-hover:translate-y-1" />
           </a>
-          <button className="btn-outline group">
-            <Play className="mr-2 w-4 h-4" />
-            Saber mais
-          </button>
         </motion.div>
       </div>
 
@@ -57,14 +53,6 @@ export default function HeroSection() {
         transition={{ delay: 1.5 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-muted-foreground"
-        >
-          <span className="text-xs tracking-widest uppercase">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent" />
-        </motion.div>
       </motion.div>
     </section>
   );

@@ -6,7 +6,7 @@ const navItems = [
   { label: "Trabalhos", href: "#portfolio" },
   { label: "Estúdio", href: "#about" },
   { label: "Serviços", href: "#services" },
-  { label: "Contato", href: "#contact" },
+  { label: "Contacto", href: "#contact" },
 ];
 
 export default function Navigation() {
@@ -27,19 +27,21 @@ export default function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/50" : ""
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/50" : ""
+          }`}
       >
         <nav className="container mx-auto px-6 py-5 flex items-center justify-between">
           <div className="w-36">
-            <img src="./Ativo 28w.png" alt="EstudioSeven Logo" />
+            <a href="/#">
+              <img src="./Ativo 28w.png" alt="EstudioSeven Logo" />
+            </a>
+
           </div>
-             
+
           <a href="#" className="flex items-center gap-3 group">
-            
+
             <span className="font-display font-semibold text-lg tracking-tight hidden sm:block">
-             
+
             </span>
           </a>
 
@@ -54,7 +56,7 @@ export default function Navigation() {
 
           {/* CTA Button */}
           <a href="#contact" className="hidden md:block btn-primary text-lg">
-            Iniciar Projeto
+            Iniciar Projecto
           </a>
 
           {/* Mobile Menu Button */}
@@ -99,7 +101,7 @@ export default function Navigation() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className=" mt-4 btn-primary text-xs"
               >
-                Iniciar Projeto
+                Iniciar Projecto
               </motion.a>
             </div>
           </motion.div>

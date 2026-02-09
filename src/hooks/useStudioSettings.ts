@@ -7,7 +7,7 @@ export const useStudioSettings = () => {
     queryKey: ['studio-settings'],
     queryFn: () => studioSettingsApi.get(),
   });
-};
+}; 
 
 export const useSaveStudioSettings = () => {
   const queryClient = useQueryClient();

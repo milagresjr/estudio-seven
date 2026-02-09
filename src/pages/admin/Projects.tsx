@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import ProjectModal from "@/components/portfolio/ProjectModal";
 import {
   Select,
   SelectContent,
@@ -16,6 +17,9 @@ import {
 
 import { useProjects, useCreateProject, useUpdateProject, useDeleteProject, useUploadProjectMedia } from "@/hooks/useProjects";
 import type { Project } from "@/lib/api/types";
+import { apiImage } from "@/services/api";
+
+const UrlBase = apiImage.defaults.baseURL || "https://api.softseven.ao";
 
 const Projects = () => {
   const { data: projectsData, isLoading } = useProjects();
@@ -23,6 +27,7 @@ const Projects = () => {
   const updateProject = useUpdateProject();
   const deleteProject = useDeleteProject();
   const uploadMedia = useUploadProjectMedia();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -212,7 +217,7 @@ const Projects = () => {
             >
               <div className="relative aspect-video">
                 <img
-                  src={`http://localhost:8000${project.thumbnail_url}`}
+                  src={`${UrlBase}${project.thumbnail_url}`}
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />
@@ -223,7 +228,10 @@ const Projects = () => {
                   >
                     <Edit2 className="w-5 h-5 text-white" />
                   </button>
-                  <button className="p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors">
+                  <button className="p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors"
+                   onClick={() => setSelectedProject(project)}
+                  >
+                  
                     <Eye className="w-5 h-5 text-white" />
                   </button>
                   <button
@@ -356,7 +364,7 @@ const Projects = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="Motion Design">Motion Design</SelectItem>
-                        <SelectItem value="Fotografia">Fotografia</SelectItem>
+                        <SelectItem value="Fotografia">Animação</SelectItem>
                         <SelectItem value="Vídeo">Vídeo</SelectItem>
                         <SelectItem value="Branding">Branding</SelectItem>
                       </SelectContent>
@@ -446,6 +454,12 @@ const Projects = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <ProjectModal
+              project={selectedProject}
+              allProjects={projects} // Nova prop
+              onClose={() => setSelectedProject(null)}
+              onSelectProject={setSelectedProject} // Para permitir navegar entre eles
+            />
     </AdminLayout>
   );
 };
