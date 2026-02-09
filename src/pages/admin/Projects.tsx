@@ -364,7 +364,7 @@ const Projects = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="Motion Design">Motion Design</SelectItem>
-                        <SelectItem value="Fotografia">Animação</SelectItem>
+                        <SelectItem value="Animação">Animação</SelectItem>
                         <SelectItem value="Vídeo">Vídeo</SelectItem>
                         <SelectItem value="Branding">Branding</SelectItem>
                       </SelectContent>
