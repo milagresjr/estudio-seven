@@ -155,7 +155,7 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
                 >
                   <div className="relative aspect-video overflow-hidden rounded-xl mb-4">
                     <img
-                      src={`http://localhost:8000${p.thumbnail_url}`}
+                      src={`${UrlBase}${p.thumbnail_url}`}
                       alt={p.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
@@ -177,7 +177,7 @@ export default function ProjectModal({ project, onClose, allProjects, onSelectPr
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
-                  src={`http://localhost:8000${selectedImage.file_url}`}
+                  src={`${UrlBase}${selectedImage.file_url}`}
                   alt={selectedImage.caption}
                   className="w-full max-h-[90vh] object-contain rounded-xl"
                 />
