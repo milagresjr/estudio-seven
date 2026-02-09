@@ -4,12 +4,38 @@ import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import { api } from "@/services/api";
+import { useStudioSettings} from "@/hooks/useStudioSettings";
+import { useEffect} from "react";
 
 const UrlBase = api.defaults.baseURL || "https://api.softseven.ao/api";
 
 
 
 export default function ContactSection() {
+
+  const { data: studioSettings, isLoading } = useStudioSettings();
+    
+      const [settings, setSettings] = useState({
+        studio_name : "",
+        contact_email: "",
+        phone: "",
+        bio: "",
+    
+      });
+  
+      // Load settings from API
+        useEffect(() => {
+          if (studioSettings) {
+            setSettings({
+              studio_name: studioSettings.studio_name || "",
+              contact_email: studioSettings.contact_email || "",
+              phone: studioSettings.phone || "",
+              bio: studioSettings.bio || "",
+            });
+          }
+        }, [studioSettings]);
+
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -78,8 +104,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">Email</span>
-                  <a href="mailto:estudio@softseven.ao" className="text-foreground hover:text-primary transition-colors">
-                    estudio@softseven.ao
+                  <a href={`mailto:${studioSettings.contact_email}`} className="text-foreground hover:text-primary transition-colors">
+                    {studioSettings.contact_email}
                   </a>
                 </div>
               </div>
@@ -90,8 +116,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">Telefone</span>
-                  <a href="tel:+244922347187" className="text-foreground hover:text-primary transition-colors">
-                    +244 922 347 187
+                  <a href={`tel:${studioSettings.phone}`} className="text-foreground hover:text-primary transition-colors">
+                    {studioSettings.phone}
                   </a>
                 </div>
               </div>
