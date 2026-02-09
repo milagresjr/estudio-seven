@@ -55,7 +55,9 @@ export default function AboutSection() {
               Onde a Visão Encontra o Movimento
             </h2>
             <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-              {settings.bio || "O Estúdio Seven é um estúdio de produção de motion design e animação dedicado a transformar ideias em narrativas visuais impactantes. Com uma equipe apaixonada e experiente, oferecemos serviços de produção de motion design e animação para empresas, marcas e criadores de conteúdo. Nossa missão é criar vídeos que não apenas informem, mas também inspirem e envolvam o público, ajudando nossos clientes a contar suas histórias de maneira única e memorável."}
+              {settings && (
+                settings.bio || "O Estúdio Seven é um estúdio de produção de motion design e animação dedicado a transformar ideias em narrativas visuais impactantes. Com uma equipe apaixonada e experiente, oferecemos serviços de produção de motion design e animação para empresas, marcas e criadores de conteúdo. Nossa missão é criar vídeos que não apenas informem, mas também inspirem e envolvam o público, ajudando nossos clientes a contar suas histórias de maneira única e memorável."
+              )}
             </p>
           </motion.div>
 

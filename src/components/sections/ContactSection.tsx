@@ -4,8 +4,8 @@ import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import { api } from "@/services/api";
-import { useStudioSettings} from "@/hooks/useStudioSettings";
-import { useEffect} from "react";
+import { useStudioSettings } from "@/hooks/useStudioSettings";
+import { useEffect } from "react";
 
 const UrlBase = api.defaults.baseURL || "https://api.softseven.ao/api";
 
@@ -14,27 +14,29 @@ const UrlBase = api.defaults.baseURL || "https://api.softseven.ao/api";
 export default function ContactSection() {
 
   const { data: studioSettings, isLoading } = useStudioSettings();
-    
-      const [settings, setSettings] = useState({
-        studio_name : "",
-        contact_email: "",
-        phone: "",
-        bio: "",
-    
-      });
-  
-      // Load settings from API
-        useEffect(() => {
-          if (studioSettings) {
-            setSettings({
-              studio_name: studioSettings.studio_name || "",
-              contact_email: studioSettings.contact_email || "",
-              phone: studioSettings.phone || "",
-              bio: studioSettings.bio || "",
-            });
-          }
-        }, [studioSettings]);
 
+  const [settings, setSettings] = useState({
+    studio_name: "",
+    contact_email: "",
+    phone: "",
+    bio: "",
+
+  });
+
+  // Load settings from API
+  useEffect(() => {
+    if (studioSettings) {
+      setSettings({
+        studio_name: studioSettings.studio_name || "",
+        contact_email: studioSettings.contact_email || "",
+        phone: studioSettings.phone || "",
+        bio: studioSettings.bio || "",
+      });
+    }
+  }, [studioSettings]);
+  console.log("Studio Settings from hook:", studioSettings);
+  console.log("Setting email:", settings.contact_email);
+  console.log("Setting phone:", settings.phone);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -104,9 +106,12 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">Email</span>
-                  <a href={`mailto:${studioSettings.contact_email}`} className="text-foreground hover:text-primary transition-colors">
-                    {studioSettings.contact_email}
-                  </a>
+                  {studioSettings && (
+                    <a href={`mailto:${studioSettings.contact_email}`}>
+                      {studioSettings.contact_email}
+                    </a>
+                  )}
+
                 </div>
               </div>
 
@@ -116,9 +121,11 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <span className="text-sm text-muted-foreground block">Telefone</span>
-                  <a href={`tel:${studioSettings.phone}`} className="text-foreground hover:text-primary transition-colors">
-                    {studioSettings.phone}
-                  </a>
+                  {studioSettings && (
+                    <a href={`tel:${studioSettings.phone}`}>
+                      {studioSettings.phone}
+                    </a>
+                  )}
                 </div>
               </div>
 
